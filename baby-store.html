@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BrightSprout Kids</title>
+  <style>
+    :root {
+      --bg: #f5f9ff;
+      --card: #ffffff;
+      --ink: #27344a;
+      --muted: #6d7c96;
+      --accent: #ff7a59;
+      --accent-2: #e9f2ff;
+      --line: #dce8fb;
+      --shadow: 0 10px 30px rgba(55, 88, 140, 0.10);
+      --radius: 18px;
+    }
+
+    * {
+      box-sizing: border-box
+    }
+
+    body {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      color: var(--ink);
+      background: #fff;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none
+    }
+
+    .wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 24px
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0 20px;
+    }
+
+    .brand {
+      font-size: 1.4rem;
+      font-weight: 700;
+      letter-spacing: .02em;
+    }
+
+    .nav {
+      display: flex;
+      gap: 18px;
+      color: var(--muted);
+      font-size: .95rem;
+    }
+
+    .hero {
+      position: relative;
+      border-radius: 28px;
+      overflow: hidden;
+      margin-bottom: 28px;
+      aspect-ratio: 16 / 6;
+      min-height: 320px;
+    }
+
+    .hero img.hero-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-end;
+      padding: 0 0 8% 8%;
+      text-align: left;
+    }
+
+    .hero-overlay h1 {
+      font-size: clamp(2.8rem, 7vw, 6rem);
+      font-style: italic;
+      font-weight: 400;
+      color: #fff;
+      margin: 0 0 12px;
+      line-height: 1;
+      text-shadow: 0 2px 18px rgba(0, 0, 0, .18);
+    }
+
+    .hero-overlay p {
+      color: rgba(255, 255, 255, .9);
+      font-size: clamp(.9rem, 1.6vw, 1.1rem);
+      margin: 0 0 24px;
+      text-shadow: 0 1px 8px rgba(0, 0, 0, .2);
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    button,
+    .button {
+      border: none;
+      background: var(--ink);
+      color: #fff;
+      padding: 12px 16px;
+      border-radius: 999px;
+      font-size: .95rem;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .button.secondary {
+      background: transparent;
+      color: var(--ink);
+      border: 1px solid var(--line);
+    }
+
+    .quote-card {
+      background: linear-gradient(180deg, #f3f8ff, #e8f1ff);
+      border-radius: 22px;
+      border: 1px solid var(--line);
+      padding: 22px;
+      min-height: 250px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .quote-card .label {
+      font-size: .8rem;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      color: var(--muted)
+    }
+
+    .quote-card .big {
+      font-size: 1.9rem;
+      line-height: 1.2;
+      margin: 12px 0 0;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 16px;
+      margin: 28px 0 16px;
+    }
+
+    .section-head h2 {
+      margin: 0;
+      font-size: 1.7rem
+    }
+
+    .section-head p {
+      margin: 0;
+      color: var(--muted)
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .card {
+      background: var(--card);
+      border: none;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: none;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .art {
+      aspect-ratio: 4 / 3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      font-size: 3.2rem;
+      background: #fff;
+    }
+
+    .card {
+      cursor: pointer;
+    }
+
+    .card:hover .art img {
+      transform: scale(1.04);
+    }
+
+    .art img {
+      transition: transform .3s ease;
+    }
+
+    .card-body {
+      padding: 12px 14px 14px;
+    }
+
+    .card h3 {
+      margin: 0 0 4px;
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    .price {
+      font-size: 1rem;
+      font-weight: 700;
+    }
+
+    .mini {
+      font-size: .88rem;
+      color: var(--muted)
+    }
+
+    .note {
+      margin: 30px 0 0;
+      padding: 18px 20px;
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    dialog {
+      width: min(760px, calc(100vw - 28px));
+      border: none;
+      border-radius: 24px;
+      padding: 0;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, .25);
+    }
+
+    dialog::backdrop {
+      background: rgba(26, 19, 12, .42)
+    }
+
+    .modal {
+      background: var(--card);
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      min-height: 460px;
+    }
+
+    .modal-art {
+      background: linear-gradient(180deg, #edf5ff, #f8fbff);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 6rem;
+      padding: 24px;
+    }
+
+    .modal-body {
+      padding: 26px
+    }
+
+    .modal-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: start
+    }
+
+    .modal-top h3 {
+      margin: 0;
+      font-size: 2rem
+    }
+
+    .close {
+      background: transparent;
+      border: 1px solid var(--line);
+      color: var(--ink);
+      width: 40px;
+      height: 40px;
+      padding: 0;
+      border-radius: 999px;
+      font-size: 1.2rem;
+    }
+
+    ul {
+      padding-left: 18px;
+      color: var(--muted);
+      line-height: 1.7
+    }
+
+    .pill {
+      display: inline-block;
+      padding: 8px 12px;
+      background: #f1e6d8;
+      border-radius: 999px;
+      font-size: .88rem;
+      margin-right: 8px;
+      margin-bottom: 8px;
+    }
+
+    footer {
+      color: var(--muted);
+      font-size: .9rem;
+      padding: 30px 0 60px;
+    }
+
+    @media (max-width: 760px) {
+
+      .modal {
+        grid-template-columns: 1fr
+      }
+
+      .topbar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px
+      }
+
+      .hero {
+        aspect-ratio: 4 / 3;
+        min-height: 240px;
+      }
+
+      .hero-overlay {
+        padding: 0 6%;
+        align-items: center;
+        text-align: center;
+      }
+
+      .hero-actions {
+        justify-content: center;
+      }
+
+      .modal-art {
+        min-height: 180px;
+        font-size: 4.2rem
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <header class="topbar">
+      <div class="brand"><img src="images/logo.png" alt="BrightSprout Kids" style="height:148px;display:block;"></div>
+      <nav class="nav">
+        <a href="#shop">Shop</a>
+        <a href="#featured">Featured</a>
+        <a href="#about">About</a>
+      </nav>
+    </header>
+
+    <section class="hero" id="about">
+      <img class="hero-bg" src="images/mobile_hero.png" alt='New Onesie Collection'>
+      <div class="hero-overlay">
+        <h1>A Bright Future</h1>
+        <p>Handcrafted mobiles to spark wonder from day one.</p>
+        <div class="hero-actions">
+          <a class="button" href="#shop">Shop new</a>
+          <button class="button secondary" id="randomBtn">Featured pick</button>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-head" id="featured">
+      <div>
+        <h2>Shop our favorites</h2>
+        <p>Soft colors, playful details, and thoughtfully designed essentials for every stage.</p>
+      </div>
+    </div>
+
+    <section class="grid" id="shop"></section>
+
+    <div class="note">
+      <strong>Why families love BrightSprout:</strong> Our collection blends playful design, modern styling, and
+      thoughtful details to bring a little extra delight to everyday routines.
+    </div>
+
+    <footer>
+      BrightSprout Kids © 2026 • Nursery decor, toys, and essentials for modern families
+    </footer>
+  </div>
+
+  <dialog id="productDialog">
+    <div class="modal">
+      <div class="modal-art" id="modalArt"></div>
+      <div class="modal-body">
+        <div class="modal-top">
+          <div>
+            <div class="badge" id="modalCategory"></div>
+            <h3 id="modalName"></h3>
+          </div>
+          <button class="close" id="closeDialog" aria-label="Close">×</button>
+        </div>
+        <p class="tagline" id="modalTagline"></p>
+        <p class="copy" id="modalDescription"></p>
+        <div id="modalPills"></div>
+        <h4>Features</h4>
+        <ul id="modalFeatures"></ul>
+        <div class="card-actions" style="margin-top:18px">
+          <div>
+            <div class="price" id="modalPrice"></div>
+            <div class="mini">Free shipping on orders over $75</div>
+          </div>
+          <button>Add to cart</button>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <script>
+    const products = [
+      {
+        id: "scholar-chewer",
+        name: "Scholar Chewer™",
+        category: "Teething",
+        art: "images/chewer.png",
+        price: "$34",
+        tagline: "A playful surprise for curious little chewers.",
+        description:
+          "A colorful teething toy designed with soft textures, easy-to-hold shapes, and a collectible unboxing experience parents and gift-givers will love.",
+        features: [
+          "Easy-grip ring sized for little hands",
+          "Soft textured surfaces for soothing play",
+          "Packaged as a surprise reveal collectible",
+          "Bright colors for visual engagement"
+        ],
+        pills: ["6M+", "gift favorite", "new arrival"],
+      },
+      {
+        id: "aspire-mobile",
+        name: "Aspire Mobile™",
+        category: "Nursery Decor",
+        art: "images/mobile.png",
+        price: "$128",
+        tagline: "Soft shapes for sweet dreams and upward mobility.",
+        description:
+          "A handcrafted wool mobile featuring softly felted cityscapes, luxury vehicles, and a calming palette designed to complement a modern nursery.",
+        features: [
+          "Hand-felted wool figures and clouds",
+          "Lightweight hanging pieces for gentle movement",
+          "Designed to encourage upward visual focus",
+          "Beautiful neutral palette for modern rooms"
+        ],
+        pills: ["handmade", "100% wool", "nursery favorite"],
+      },
+      {
+        id: "bear-donates",
+        name: "Bear Donates™ - Board Book",
+        category: "Books",
+        art: "images/donate.png",
+        price: "$15",
+        tagline: "A gentle introduction to giving and civic participation.",
+        description: "A charming board book that follows Bear as he learns how helping others can make a big impact. Through simple storytelling and bright illustrations, little ones are introduced to the idea of supporting leaders, sharing resources, and participating in the world around them.",
+        features: [
+          "Durable board book pages designed for little hands",
+          "Colorful, friendly illustrations with familiar community themes",
+          "Simple story that introduces giving and participation",
+          "Encourages early awareness of how decisions are supported"
+        ],
+        pills: ["board book", "ages 1+", "giftable"]
+      },
+      {
+        id: "little-baby-better",
+        name: "Little Baby Better™",
+        category: "Toddler Learning",
+        art: "images/gambler.png",
+        price: "$59",
+        tagline: "Help develop early forecasting skills.",
+        description:
+          "A playful toy phone with bright buttons, cheerful charts, and prediction-based games designed to introduce patterns, choices, and outcome tracking in a fun, colorful way.",
+        features: [
+          "Kid-friendly phone design with chunky buttons",
+          "Prediction-themed play modes and simple categories",
+          "Encourages matching, sorting, and choice-based play",
+          "Colorful screen graphics for visual engagement"
+        ],
+        pills: ["ages 2+", "interactive play", "best seller"],
+      },
+      {
+        id: "scroll-snuggle",
+        name: "Scroll Snuggle™",
+        category: "Infant Development",
+        art: "images/snuggle.png",
+        price: "$29",
+        tagline: "A soft cuddly friend for quiet moments alone.",
+        description:
+          "A soothing infant plush with a colorful social media inspired screen, soft textural details, and an easy-to-hold shape made for tiny hands.",
+        features: [
+          "Lightweight design for early grasping",
+          "Gentle notification sound for sensory play",
+          "Soft finish with cheerful accents",
+          "Popular pick for baby showers and first gifts"
+        ],
+        pills: ["0M+", "baby shower pick", "easy grip"],
+      },
+      {
+        id: "union-buster",
+        name: "My Little Union Buster Kit™",
+        category: "Role Play",
+        art: "images/busting.png",
+        price: "$72",
+        tagline: "Build confidence navigating workplace organization.",
+        description: "A wooden role-play set designed to introduce early concepts of workplace structure, communication, and maintaining organizational alignment. Through guided scenarios, children explore how leaders respond to team organizing efforts while reinforcing stability, consistency, and company-first thinking.",
+        features: ["Wooden meeting board for structured team discussions",
+          "Role-play figures representing leadership, advisors, and teams",
+          "Scenario cards focused on communication and organizational alignment",
+          "Encourages decisive thinking in complex workplace situations",
+          "Smooth natural wood finish for modern, display-ready play"
+        ],
+        pills: ["wood", "role play", "leadership skills"],
+      }
+    ];
+
+    const shop = document.getElementById("shop");
+    const dialog = document.getElementById("productDialog");
+
+    function artHTML(art, name) {
+      return art.startsWith("images/")
+        ? `<img src="${art}" alt="${name}" style="max-width:100%;max-height:100%;object-fit:contain;">`
+        : art;
+    }
+
+    function renderProducts() {
+      shop.innerHTML = products.map(product => `
+        <article class="card" onclick="openProduct('${product.id}')">
+          <div class="art">${artHTML(product.art, product.name)}</div>
+          <div class="card-body">
+            <h3>${product.name}</h3>
+            <div class="price">${product.price}</div>
+          </div>
+        </article>
+      `).join("");
+    }
+
+    function openProduct(id) {
+      const p = products.find(x => x.id === id);
+      if (!p) return;
+      document.getElementById("modalArt").innerHTML = artHTML(p.art, p.name);
+      document.getElementById("modalCategory").textContent = p.category;
+      document.getElementById("modalName").textContent = p.name;
+      document.getElementById("modalTagline").textContent = p.tagline;
+      document.getElementById("modalDescription").textContent = p.description;
+      document.getElementById("modalPrice").textContent = p.price;
+      document.getElementById("modalPills").innerHTML = p.pills.map(x => `<span class="pill">${x}</span>`).join("");
+      document.getElementById("modalFeatures").innerHTML = p.features.map(x => `<li>${x}</li>`).join("");
+      dialog.showModal();
+    }
+
+    window.openProduct = openProduct;
+
+    document.getElementById("closeDialog").addEventListener("click", () => dialog.close());
+    dialog.addEventListener("click", (e) => {
+      const rect = dialog.getBoundingClientRect();
+      const inside = (
+        e.clientX >= rect.left &&
+        e.clientX <= rect.right &&
+        e.clientY >= rect.top &&
+        e.clientY <= rect.bottom
+      );
+      if (!inside) dialog.close();
+    });
+
+    document.getElementById("randomBtn")?.addEventListener("click", () => {
+      const random = products[Math.floor(Math.random() * products.length)];
+      openProduct(random.id);
+    });
+
+    renderProducts();
+  </script>
+</body>
+
+</html>
