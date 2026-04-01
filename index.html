@@ -75,7 +75,7 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: center 20%;
+      object-position: center 50%;
     }
 
     .hero-overlay {
@@ -83,26 +83,26 @@
       inset: 0;
       display: flex;
       flex-direction: column;
-      align-items: flex-start;
+      align-items: flex-end;
       justify-content: flex-end;
-      padding: 0 0 3% 8%;
-      text-align: left;
+      padding: 0 5% 2% 0;
+      text-align: right;
     }
 
     .hero-overlay h1 {
-      font-size: clamp(2rem, 5vw, 4rem);
+      font-size: clamp(1.2rem, 3vw, 2.2rem);
       font-style: italic;
       font-weight: 400;
       color: #fff;
-      margin: 0 0 12px;
+      margin: 0 0 4px;
       line-height: 1;
       text-shadow: 0 2px 18px rgba(0, 0, 0, .18);
     }
 
     .hero-overlay p {
       color: rgba(255, 255, 255, .9);
-      font-size: clamp(.9rem, 1.6vw, 1.1rem);
-      margin: 0 0 24px;
+      font-size: clamp(.75rem, 1.2vw, .9rem);
+      margin: 0 0 10px;
       text-shadow: 0 1px 8px rgba(0, 0, 0, .2);
     }
 
@@ -126,9 +126,9 @@
     }
 
     .button.secondary {
-      background: transparent;
-      color: var(--ink);
-      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, .2);
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, .6);
     }
 
     .quote-card {
@@ -209,6 +209,12 @@
 
     .art img {
       transition: transform .3s ease;
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
+      display: block;
+      object-fit: contain;
     }
 
     .card-body {
@@ -331,18 +337,45 @@
       }
 
       .hero {
+        aspect-ratio: auto;
+        min-height: 0;
+        overflow: visible;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .hero img.hero-bg {
+        position: static;
+        width: 100%;
+        height: auto;
         aspect-ratio: 4 / 3;
-        min-height: 240px;
+        object-fit: cover;
+        object-position: center 50%;
       }
 
       .hero-overlay {
-        padding: 0 6%;
-        align-items: center;
-        text-align: center;
+        position: static;
+        background: none;
+        padding: 12px 4% 0;
+        align-items: flex-start;
+        text-align: left;
+        color: var(--ink);
+      }
+
+      .hero-overlay h1 {
+        color: var(--ink);
+        text-shadow: none;
+        font-size: clamp(1.2rem, 5vw, 1.8rem);
+      }
+
+      .hero-overlay p {
+        color: var(--muted);
+        text-shadow: none;
+        font-size: .85rem;
       }
 
       .hero-actions {
-        justify-content: center;
+        justify-content: flex-start;
       }
 
       .modal-art {
