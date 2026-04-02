@@ -53,11 +53,31 @@
       letter-spacing: .02em;
     }
 
+    .logo-img {
+      height: 148px;
+      display: block;
+    }
+
+    .topbar-icons {
+      display: none;
+    }
+
     .nav {
       display: flex;
       gap: 18px;
       color: var(--muted);
       font-size: .95rem;
+    }
+
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--ink);
+      padding: 4px 8px;
+      margin-left: auto;
     }
 
     .hero {
@@ -239,12 +259,29 @@
 
     .note {
       margin: 30px 0 0;
-      padding: 18px 20px;
-      background: #ffffff;
-      border: 1px solid var(--line);
+      padding: 60px 48px;
+      background: linear-gradient(135deg, #fde8f0, #e8f4fd, #e8fdf0, #fdf5e8);
+      border: none;
       border-radius: 16px;
       color: var(--muted);
-      line-height: 1.6;
+      line-height: 1.8;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      font-size: clamp(1rem, 1.8vw, 1.25rem);
+    }
+
+    .note strong {
+      display: block;
+      font-size: clamp(1.4rem, 3vw, 2.2rem);
+      color: var(--ink);
+      margin: 40px 0 12px;
+      line-height: 1.2;
+    }
+
+    .note strong:first-child {
+      margin-top: 0;
     }
 
     dialog {
@@ -330,10 +367,71 @@
         grid-template-columns: 1fr
       }
 
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
       .topbar {
+        display: grid;
+        grid-template-columns: 40px 1fr 40px;
+        grid-template-rows: auto auto;
+        align-items: center;
+        padding: 10px 0 12px;
+        gap: 0;
+      }
+
+      .menu-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        grid-column: 1;
+        grid-row: 1;
+      }
+
+      .brand {
+        grid-column: 2;
+        grid-row: 1;
+        display: flex;
+        justify-content: center;
+      }
+
+      .logo-img {
+        height: 48px;
+      }
+
+      .topbar-icons {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        grid-column: 3;
+        grid-row: 1;
+        font-size: 1.2rem;
+        color: var(--ink);
+      }
+
+      .nav {
+        display: none;
         flex-direction: column;
-        align-items: flex-start;
-        gap: 8px
+        grid-column: 1 / -1;
+        grid-row: 2;
+        width: 100%;
+        gap: 0;
+        padding: 8px 0 4px;
+        border-top: 1px solid var(--line);
+      }
+
+      .nav.open {
+        display: flex;
+      }
+
+      .nav-link {
+        padding: 12px 4px;
+        border-bottom: 1px solid var(--line);
+        font-size: 1rem;
+      }
+
+      .nav-link:last-child {
+        border-bottom: none;
       }
 
       .hero {
@@ -389,15 +487,16 @@
 <body>
   <div class="wrap">
     <header class="topbar">
-      <div class="brand"><img src="images/logo.png" alt="BrightSprout Kids" style="height:148px;display:block;"></div>
-      <nav class="nav">
-        <a href="#shop">Shop</a>
-        <a href="#featured">Featured</a>
-        <a href="#about">About</a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">&#9776;</button>
+      <div class="brand"><img src="images/logo.png" alt="BrightSprout Kids" class="logo-img"></div>
+      <div class="topbar-icons">&#x2764;</div>
+      <nav class="nav" id="mainNav">
+        <a href="#shop" class="nav-link">Shop</a>
+        <a href="#about" class="nav-link">About</a>
       </nav>
     </header>
 
-    <section class="hero" id="about">
+    <section class="hero">
       <img class="hero-bg" src="images/mobile_hero.png" alt='New Onesie Collection'>
       <div class="hero-overlay">
         <h1>A Bright Future</h1>
@@ -418,9 +517,24 @@
 
     <section class="grid" id="shop"></section>
 
-    <div class="note">
-      <strong>Why families love BrightSprout:</strong> Our collection blends playful design, modern styling, and
-      thoughtful details to bring a little extra delight to everyday routines.
+    <div class="note" id="about">
+      <strong>We Believe in Play</strong>
+      <p>Play is the foundation of everything. It's how children begin to understand the world around them, its rhythms,
+        its rules, and the gentle, ever-present expectations of the people in it. At BrightSprout, every toy we carry is
+        chosen to spark curiosity, nurture imagination, and quietly introduce little ones to the way things tend to go.
+      </p>
+
+      <strong>We Believe in Growing Up Well</strong>
+      <p>Children are sponges. They absorb everything from the words we use and the routines we keep, to the values we
+        model without even realizing it. Our collection is designed to make that absorption joyful. From their very
+        first toys, BrightSprout children are gently learning that the world has a shape, and that life is so much
+        sweeter when you move with it rather than against it.</p>
+
+      <strong>We Believe in Community</strong>
+      <p>It takes a village to raise a child, and a well-raised child makes the village better for everyone. Our team is
+        here to help you find the right toy for every stage, every temperament, and every family that simply wants their
+        little one to fit in beautifully, wherever life takes them.</p>
+      <p>Thank you for trusting BrightSprout. Here's to raising children who make everyone proud.</p>
     </div>
 
     <footer>
@@ -614,6 +728,84 @@
     });
 
     renderProducts();
+
+    function launchConfetti() {
+      const overlay = document.createElement("div");
+      overlay.id = "aprilFools";
+      overlay.style.cssText = "position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;pointer-events:none;";
+
+      const msg = document.createElement("div");
+      msg.textContent = "APRIL FOOLS 🎉";
+      msg.style.cssText = "font-size:clamp(2.5rem,10vw,5rem);font-weight:900;color:#1982c4;text-shadow:0 4px 24px rgba(0,0,0,.3);letter-spacing:.05em;animation:afPop .4s cubic-bezier(.34,1.56,.64,1) both;";
+      overlay.appendChild(msg);
+
+      const canvas = document.createElement("canvas");
+      canvas.style.cssText = "position:fixed;inset:0;width:100%;height:100%;pointer-events:none;";
+      document.getElementById("productDialog").close();
+      document.body.appendChild(canvas);
+      document.body.appendChild(overlay);
+
+      const ctx = canvas.getContext("2d");
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      const colors = ["#ff595e", "#ffca3a", "#6a4c93", "#1982c4", "#8ac926", "#ff6b6b", "#ffd93d"];
+      const pieces = Array.from({ length: 120 }, () => ({
+        x: Math.random() * canvas.width,
+        y: -20 - Math.random() * 200,
+        w: 8 + Math.random() * 8,
+        h: 4 + Math.random() * 6,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        rot: Math.random() * Math.PI * 2,
+        vx: (Math.random() - .5) * 4,
+        vy: 3 + Math.random() * 5,
+        vr: (Math.random() - .5) * .2,
+      }));
+
+      let frame;
+      function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        pieces.forEach(p => {
+          p.x += p.vx; p.y += p.vy; p.rot += p.vr;
+          ctx.save();
+          ctx.translate(p.x, p.y);
+          ctx.rotate(p.rot);
+          ctx.fillStyle = p.color;
+          ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+          ctx.restore();
+        });
+        if (pieces.some(p => p.y < canvas.height + 40)) {
+          frame = requestAnimationFrame(draw);
+        }
+      }
+      draw();
+
+      setTimeout(() => {
+        cancelAnimationFrame(frame);
+        canvas.remove();
+        overlay.remove();
+      }, 3000);
+    }
+
+    const styleEl = document.createElement("style");
+    styleEl.textContent = "@keyframes afPop{from{transform:scale(.5);opacity:0}to{transform:scale(1);opacity:1}}";
+    document.head.appendChild(styleEl);
+
+    document.querySelector("dialog").addEventListener("click", e => {
+      if (e.target.tagName === "BUTTON" && e.target.textContent.trim() === "Add to cart") {
+        launchConfetti();
+      }
+    });
+
+    document.getElementById("menuToggle")?.addEventListener("click", () => {
+      document.getElementById("mainNav").classList.toggle("open");
+    });
+
+    document.querySelectorAll(".nav-link").forEach(link => {
+      link.addEventListener("click", () => {
+        document.getElementById("mainNav").classList.remove("open");
+      });
+    });
   </script>
 </body>
 
