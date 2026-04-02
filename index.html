@@ -235,14 +235,6 @@
       object-fit: contain;
     }
 
-    .modal-art img {
-      max-width: 100%;
-      max-height: 420px;
-      width: 100%;
-      height: auto;
-      display: block;
-      object-fit: contain;
-    }
 
     .card-body {
       padding: 12px 14px 14px;
@@ -312,11 +304,21 @@
 
     .modal-art {
       background: linear-gradient(180deg, #edf5ff, #f8fbff);
+      position: relative;
+      font-size: 6rem;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 6rem;
+    }
+
+    .modal-art img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
       padding: 24px;
+      box-sizing: border-box;
     }
 
     .modal-body {
@@ -579,18 +581,18 @@
   <script>
     const products = [
       {
-        id: "scholar-chewer",
-        name: "Scholar Chewer™",
+        id: "mystery-teether",
+        name: "Mystery Teether™",
         category: "Teething",
         art: "images/chewer.png",
         price: "$34",
-        tagline: "A playful surprise for curious little chewers.",
+        tagline: "A playful surprise for curious little teethers.",
         description:
-          "A colorful teething toy designed with soft textures, easy-to-hold shapes, and a collectible unboxing experience parents and gift-givers will love.",
+          "A colorful teething toy designed with soft textures, easy-to-hold shapes, and a mystery collectible unboxing experience parents and gift-givers will love.",
         features: [
           "Easy-grip ring sized for little hands",
-          "Soft textured surfaces for soothing play",
-          "Packaged as a surprise reveal collectible",
+          "1 in 500 chance of winning $100 Roth IRA Fund",
+          "Packaged to encourage dopamine engagement",
           "Bright colors for visual engagement"
         ],
         pills: ["6M+", "gift favorite", "new arrival"],
@@ -603,11 +605,11 @@
         price: "$128",
         tagline: "Soft shapes for sweet dreams and upward mobility.",
         description:
-          "A handcrafted wool mobile featuring softly felted cityscapes, luxury vehicles, and a calming palette designed to complement a modern nursery.",
+          "Billionaires are a baby's best friend. This handcrafted wool mobile featuring softly felted cityscapes, luxury vehicles, and high end yachts is sure to inspire your child to become the future billionaire they are meant to be.",
         features: [
           "Hand-felted wool figures and clouds",
-          "Lightweight hanging pieces for gentle movement",
-          "Designed to encourage upward visual focus",
+          "Lightweight hanging pieces with a heavy undertone",
+          "Designed to encourage upward economic momentum",
           "Beautiful neutral palette for modern rooms"
         ],
         pills: ["handmade", "100% wool", "nursery favorite"],
@@ -618,12 +620,12 @@
         category: "Books",
         art: "images/donate.png",
         price: "$15",
-        tagline: "A gentle introduction to giving and civic participation.",
-        description: "A charming board book that follows Bear as he learns how helping others can make a big impact. Through simple storytelling and bright illustrations, little ones are introduced to the idea of supporting leaders, sharing resources, and participating in the world around them.",
+        tagline: "A gentle introduction to corporate giving and civic participation.",
+        description: "A charming board book that follows CEO Bear as he learns how helping others can make a big impact. Through corporate lobbying and bright illustrations, little ones are introduced to the idea of supporting leaders, creating laws, and ensuring profit over everything.",
         features: [
           "Durable board book pages designed for little hands",
-          "Colorful, friendly illustrations with familiar community themes",
-          "Simple story that introduces giving and participation",
+          "Colorful, friendly illustrations with real backroom dealmaking",
+          "Simple story that introduces giving with expectations",
           "Encourages early awareness of how decisions are supported"
         ],
         pills: ["board book", "ages 1+", "giftable"]
@@ -634,13 +636,13 @@
         category: "Toddler Learning",
         art: "images/gambler.png",
         price: "$59",
-        tagline: "Help develop early forecasting skills.",
+        tagline: "Help develop early prediction skills.",
         description:
-          "A playful toy phone with bright buttons, cheerful charts, and prediction-based games designed to introduce patterns, choices, and outcome tracking in a fun, colorful way.",
+          "A playful toy phone with bright buttons, cheerful charts, and prediction based visuals designed to build early familiarity with risk, reward, and the thrill of getting it right.",
         features: [
           "Kid-friendly phone design with chunky buttons",
-          "Prediction-themed play modes and simple categories",
-          "Encourages matching, sorting, and choice-based play",
+          "Includes high limit play card for seamless, uninterrupted play",
+          "Encourages matching, sorting, and profit-based play",
           "Colorful screen graphics for visual engagement"
         ],
         pills: ["ages 2+", "interactive play", "best seller"],
